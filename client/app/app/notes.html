@@ -1,0 +1,33 @@
+<h3>Notes from the Customer</h3>
+<p ng-if="!main.formbookInfo.notes">There are no notes from the customer.</p>
+<table class="table-bordered" style="width:100%; table-layout:fixed;" ng-if="main.formbookInfo.notes">
+<thead>
+  <tr>
+    <td style="width: 10px;"></td>
+    <td style="width: 30%;">
+      <a href="#" ng-click="orderByField='person.date'; reverseSort = !reverseSort">
+          Date <span ng-show="orderByField == 'person.date'"><span ng-show="!reverseSort"><i class="fa fa-sort-up"></i></span><span ng-show="reverseSort"><i class="fa fa-sort-desc"></i></span></span>
+          </a>
+    </td>
+    <td width="20%">Note Text</td>
+    <td style="width: 20%;">User</td>
+    <td style="width: 20%;">Form</td>
+  </tr>  
+</thead>
+<tbody>
+  <tr ng-repeat-start="person in main.formbookInfo.notes">
+    <td>
+      <span style="cursor:pointer;" ng-if="person.expanded" ng-click="person.expanded = false"><i style="color: #0EC800;" class="fa fa-minus-circle fa-2x"></i></span>
+      <span style="cursor:pointer;" ng-if="!person.expanded" ng-click="person.expanded = true"><i style="color: #0EC800;" class="fa fa-plus-circle fa-2x"></i></span>
+    </td>
+    <td>{{person.Date}}</td>
+    <td style="white-space: nowrap; overflow: hidden;">
+    {{person['Note Text']}}</td>
+    <td>{{person.Customer}}</td>
+    <td>{{person.Form}}</td>
+  </tr>
+  <tr ng-if="person.expanded" ng-repeat-end="">
+    <td colspan="5">{{person['Note Text']}}</td>
+  </tr>
+</tbody>
+</table>

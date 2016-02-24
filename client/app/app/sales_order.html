@@ -1,0 +1,32 @@
+<h3>Sales Order Details</h3>
+<table class="table-bordered" style="width:100%;table-layout:fixed; ">
+<thead>
+  <tr>
+    <td style="width: 10px;"></td>
+    <td style="width: 60%;">
+    <a href="#" ng-click="orderByField='person.master_order_item_name'; reverseSort = !reverseSort">
+          Details <span ng-show="orderByField == 'person.master_order_item_name'"><span ng-show="!reverseSort"><i class="fa fa-sort-up"></i></span><span ng-show="reverseSort"><i class="fa fa-sort-desc"></i></span></span>
+          </a>
+      
+    </td>
+    <td style="width: 30%;">
+	 <a href="#" ng-click="orderByField='person.quantity'; reverseSort = !reverseSort">
+          Quantity <span ng-show="orderByField == 'person.quantity'"><span ng-show="!reverseSort"><i class="fa fa-sort-up"></i></span><span ng-show="reverseSort"><i class="fa fa-sort-desc"></i></span></span>
+          </a>
+    </td>
+  </tr>  
+</thead>
+<tbody>
+  <tr ng-repeat-start="person in main.formbookInfo.order_details|orderBy:orderByField:reverseSort">
+    <td>
+      <span style="cursor:pointer;" ng-if="person.expanded" ng-click="person.expanded = false"><i style="color: #0EC800;" class="fa fa-minus-circle fa-2x"></i></span>
+      <span style="cursor:pointer;" ng-if="!person.expanded" ng-click="person.expanded = true"><i style="color: #0EC800;" class="fa fa-plus-circle fa-2x"></i></span>
+    </td>
+    <td>{{person.master_order_item_name}}</td>
+    <td>{{person.quantity}}</td>
+  </tr>
+  <tr ng-if="person.expanded" ng-repeat-end="">
+    <td colspan="3"><strong>{{person['master_order_item_sku']}}</strong><p>{{person['master_order_item_desc']}}</p></td>
+  </tr>
+</tbody>
+</table>

@@ -1,0 +1,42 @@
+<style type="text/css">
+    .sidebar--nested a i{
+        float: left;
+        width: 20%;
+    }
+    .sidebar--nest a span {
+        width: 90%;
+    }
+
+</style>
+<nav>
+    <ul class="sidebar">
+        <li ng-repeat="f in sb.listy">
+            <div class="sidebar__background"></div>
+            <div class="sidebar__title">
+            <div class="sidebar__icon">
+                <i class="{{::f.icon}}"></i>
+            </div>
+             <a ui-sref="{{f.link}}"><span>{{::f.name}}</span></a>
+            </div>
+        </li>
+        <li>
+            <div class="sidebar__background"></div>
+            <div class="sidebar__title">
+            <div class="sidebar__icon">
+                <i class="fa fa-book fa-2x"></i>
+            </div>
+             <a href="javascript:void(0)"><span>Form Book</span></a>
+            </div>
+        </li>
+    </ul>
+    <ul class="sidebar--nested">
+        <li ng-repeat="form in sb.forms">            
+            <a ui-sref="dashboard.buildsheet.form({ finst:form.finst })">
+                <i ng-if="form.approved == 1" class="fa fa-check-circle-o" style="color: green;"></i>
+                <i ng-if="form.approved == 0" class="fa fa-ban" style="color:red;"></i>
+            <span>{{::form.module}}</span>
+            
+            </a>
+        </li>
+    </ul>
+</nav>

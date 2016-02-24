@@ -1,0 +1,44 @@
+.card {
+		margin-left: 5px;
+		width: 200px;
+		float: left;
+
+	}
+
+	.card--image {
+		border: 1px solid black;
+		width: 200px;
+		height: 200px;
+		overflow: hidden;
+		cursor: pointer;
+	}
+
+	.card--image img {
+		width:200px;
+		height: auto;
+	}
+
+	.card--footer {
+		color: #000;
+		margin-top: 4px;
+		margin-bottom: 4px;
+		background: #e6e6e6;
+		padding: 3px;
+		width: 100%;
+		text-decoration: none;
+		display: inline-block;
+	}
+	.card a:hover {
+		text-decoration: none;
+	}
+
+	.card--image__blank {
+		color: #000;
+		margin-top: 35%;
+		font-size: xx-large; 
+	}
+	.card i {
+		float: right;
+		margin-right: 5px;
+
+	}

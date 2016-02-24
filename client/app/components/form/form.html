@@ -1,0 +1,95 @@
+
+<h4 ng-bind="::forms.formy.module"></h4>
+<section style="float:right;" ng-if="forms.formy.date_submitted === null">
+	<p>Awaiting form submission from the customer</p>
+</section>
+<section style="width:100%; display: inline-block;" ng-if="forms.formy.form_name !== 'lblicensekey'">
+<section style="float:right;" ng-if="forms.formy.date_submitted !== null && forms.formy.approved === null">
+	<span ng-click="forms.approveForm(forms.formy.finst)" style="cursor:pointer;"><i class="fa fa-check-circle fa-2x" style="color: green;"></i> Approve</span>
+	<span ng-click="forms.rejectForm(forms.formy.finst)" style="cursor:pointer;"><i class="fa fa-times-circle fa-2x" style="color: red;"></i> Reject</span>	
+</section>
+<section class="form--status" ng-class="(forms.formy.approved  === '1') ? 'form__approved' : 'form__rejected'" ng-if="forms.formy.date_submitted !== null && forms.formy.approved !== null">
+	<p style="float:left;">Status</p>
+	<p style="float:right" >
+		<span ng-if="forms.formy.approved === '1'">Approved</span>
+		<span ng-if="forms.formy.approved === '0'">Rejected</span>
+	 	by {{::forms.formy.judgedBy}} on {{forms.convertDate(forms.formy.date_judged) | date:"MMMM d, y 'at' h:mma" }}
+		<span ng-if="forms.formy.approved !== null">
+			<a href="javascript:void(0)" ng-if="forms.formy.approved === '1'" ng-click="forms.reopenForm(forms.formy.finst)">
+				[reopen]
+			</a>
+		</span>
+	</p>
+</section>
+</section>
+<div ng-repeat="(key, data) in forms.formy.formdata">
+
+<div class="container343" ng-if="key === 'table'">
+  <div class="row">
+      <div class="col-lg-12">
+        <div class="button-group">
+          <button type="button" style="float: left;" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span> <span class="caret"></span></button>
+          <ul class="dropdown-menu" ng-click="$event.stopPropagation()">
+            <li ng-repeat="field in data[0]" >
+              <a href="javascript:void(0)" class="small" data-value="{{::field.fielddesc}}" tabIndex="-1">
+                <input type="checkbox" ng-model="field.bIsVisible" ng-true-value="'1'" ng-false-value="'0'" >&nbsp;{{::field.fielddesc}}
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div style="float: right;">
+          <button ng-click="forms.expandAll()">Expand All</button>
+          <button ng-click="forms.collapseAll()">Collapse All</button>
+        </div>
+      </div>
+  </div>
+</div>
+
+<table class="table-bordered" style="width:100%; table-layout:fixed;" ng-if="key === 'table'">
+<thead>
+  <tr>
+    <td style="width: 16px;"></td>
+    <!-- <td style="width: 16px;" ng-if="::forms.bIsPortalForm"></td> -->
+    <td style="width: 16%;" ng-repeat="field in data[0]" ng-if="field.bIsVisible !== '0'">
+    {{field.fielddesc}}
+    </td>
+  </tr>  
+</thead>
+<tbody>
+  <tr ng-repeat-start="field in data">
+    <td>
+      <span style="cursor:pointer;" ng-if="field.expanded" ng-click="field.expanded = false"><i style="color: #0EC800;" class="fa fa-minus-circle fa-2x"></i></span>
+      <span style="cursor:pointer;" ng-if="!field.expanded" ng-click="field.expanded = true"><i style="color: #0EC800;" class="fa fa-plus-circle fa-2x"></i></span>
+    </td>
+    <!-- <td style="width: 16px;" ng-if="::forms.bIsPortalForm">
+    	<input type="checkbox">
+    </td> -->
+    <td ng-repeat="f in field" ng-if="data[0][$index].bIsVisible != '0' && f.fieldval != null" ><span>{{::f.fieldval}}</span></td>
+  </tr>
+  <tr ng-if="field.expanded" ng-repeat-end="">
+    <td colspan="{{ forms.getColumnSize(data[0]) }}">
+    	<div ng-repeat="item in field" style="width: 22%; float:left; margin: 10px;">
+    		<span style=""><strong>{{::item.fielddesc}}</strong></span><br>
+    		<span>{{::item.fieldval}}</span>
+    	</div>
+    </td>
+  </tr>
+</tbody>
+</table>
+
+<section ng-if="key !== 'table' && forms.formy.form_name !== 'lblicensekey'" style="float: left; width: 50%;">
+	<strong>{{data['fielddesc'] }} : </strong> {{::data['fieldval']}}
+</section>
+
+</div>
+
+<section ng-if="forms.formy.form_name == 'lblicensekey'">
+  <form ng-submit="forms.submitLoadBalKey(forms.formy.finst)">
+    <div class="form-group">
+      <label for="ff_loadbal_licensekey">License Key</label>
+      <input type="text" ng-model="forms.licensekey" class="form-control" ng-value="forms.formy.formdata[0].fieldval" placeholder="License Key">
+    </div>
+    <button type="submit" class="btn btn-default" ng-if="!forms.formy.formdata[0].fieldval" ng-click="">Save</button>
+    <button type="submit" class="btn btn-default" ng-if="forms.formy.formdata[0].fieldval">Update</button>
+  </form>
+</section>

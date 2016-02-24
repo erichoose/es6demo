@@ -1,0 +1,20 @@
+<section class="card" ng-repeat="attachment in card.data">
+<a href="{{attachment.relative_path + '/' + attachment.name}}" target="_blank">
+	<div class="card--image" ng-if="card.isImage(attachment.name)">		
+		<img ng-src="{{::attachment.relative_path + '/' + attachment.name}}" alt=""> 				
+	</div>
+	<div class="" ng-if="!card.isImage(attachment.name)">
+		<div class="card--image">
+			<p class="card--image__blank" ng-bind="card.getExtension(attachment.name)"></p>
+		</div>	
+	</div>
+	<div class="card--footer">
+	<span style="float:left;">
+		<span style="float:left;max-width:100px;overflow:hidden;white-space: nowrap;text-overflow: ellipsis; margin-right: 5px;">{{::attachment.name}}</span>
+		 | {{::attachment.size/1024 | number:0}}kb 
+
+	</span>
+		 <i class="fa fa-download"></i>
+		 </div>
+</a>
+</section>

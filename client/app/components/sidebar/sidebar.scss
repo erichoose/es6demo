@@ -1,0 +1,131 @@
+@import '../../common/base';
+
+.sidebar {
+  margin: 0px;
+  margin-right: 10px;
+  padding: 0px;
+  list-style-type: none;
+  backface-visibility: hidden;
+}
+
+.sidebar > li {
+  cursor: pointer;
+  position: relative;
+  background: #ccc;
+  width: 100%;
+  height: 70px;
+  margin-bottom: 2px;  
+}
+
+.sidebar__background {
+  width: 70px;
+  height: 70px;
+  position: absolute;
+  background: $theme-color;
+  color: #fff;
+  z-index: 2;
+}
+
+.sidebar__background i {
+  position: relative;
+}
+
+.sidebar__background:hover {
+  width: 100%;
+  /*background: #0EC800;*/
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+.sidebar__title {
+  position: absolute;
+  width: 100%;
+  z-index: 3;
+  color: #fff;
+}
+
+.sidebar__title > a {
+  display: block;
+  position: absolute;
+  float: left;
+  font-family: arial;
+  color: #fff;
+  text-decoration: none;
+  width: 100%;
+  height: 70px;
+  text-align: center;
+}
+
+.sidebar__title > a > span {
+  margin-top: 25px;
+  margin-right: 5%;
+  text-align: right;
+  display: block;
+  width: 50%;
+  float: right;
+}
+
+.sidebar__icon {
+  position: relative;
+  width: 70px;
+  height: 70px;
+  text-align: center;
+  color: #fff;
+  transition: all .5s ease-in-out;
+  float: left;
+  z-index: 100;
+}
+
+.sidebar__icon i {
+  top: 22px;
+  position: relative;
+}
+
+.sidebar > li:hover .sidebar__background {
+  cursor: pointer;
+  width: 100%;
+  transition: all 0.3s ease-in-out;
+}
+
+
+
+.sidebar--nested {
+  margin: 0px;
+  padding: 0px;
+  list-style-type: none;
+  backface-visibility: hidden;
+}
+
+.sidebar--nested > li {
+  cursor: pointer;
+  position: relative;
+  background: #ccc;
+  width: 60%;
+  height: 70px;
+  margin-left: 70px;
+  margin-bottom: 1px;
+  display: inline-block;
+}
+
+.sidebar--nested > li > a {
+  font-family: arial;
+  color: #fff;
+  text-decoration: none;
+  width: 100%;
+  height: 70px;
+  text-align: center;
+  margin-top: 10%;
+  margin-right: 5%;
+  text-align: right;
+  display: block;
+  float: right;
+}
+
+.coolSidebar {
+  @extend .sidebar;
+}
+
+.profile-widget {
+  @extend .col-6;
+  @extend .largething;
+}
